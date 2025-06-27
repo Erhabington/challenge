@@ -32,7 +32,7 @@ const Login: React.FC = () => {
         {/* Branding */}
         <div className="text-center mb-8">
           <div className="mx-auto h-12 w-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
-            <span className="text-white font-bold text-xl">P</span>
+            <span className="text-white font-bold text-xl"></span>
           </div>
           <h1 className="text-3xl font-bold text-gray-800 mb-1">PayScope</h1>
           <p className="text-sm text-gray-500">
