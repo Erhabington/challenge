@@ -23,8 +23,8 @@ password123
 
 ## Deployed URLs
 
-- **Frontend (Vercel)**: [Add your Vercel URL here]
-- **Backend (Railway)**: [Add your Railway URL here]
+- **Frontend (Vercel)**: https://payscope-git-main-ehabqasim466-1527s-projects.vercel.app/
+- **Backend (Railway)**: https://challenge-production-aa29.up.railway.app/api
 
 ## Features
 
