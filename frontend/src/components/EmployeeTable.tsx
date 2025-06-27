@@ -15,6 +15,13 @@ const EmployeeTable: React.FC = () => {
   const handleEdit = (employeeId: string) => {
     dispatch(setSelectedEmployeeId(employeeId))
     dispatch(openModal("editEmployee"))
+    // Scroll to bottom when modal opens
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      })
+    }, 100)
   }
 
   const handleDelete = async (employeeId: string) => {
@@ -26,6 +33,13 @@ const EmployeeTable: React.FC = () => {
   const handleAddHoliday = (employeeId: string) => {
     dispatch(setSelectedEmployeeId(employeeId))
     dispatch(openModal("addHoliday"))
+    // Scroll to bottom when modal opens
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      })
+    }, 100)
   }
 
   if (loading) {
@@ -132,8 +146,10 @@ const EmployeeTable: React.FC = () => {
                 Days Off
               </th>
               {user?.role === "hr" && (
-                <th style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th
+                  style={{ paddingLeft: "32px", paddingRight: "32px" }}
+                  className="py-5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   Actions
                 </th>
               )}
@@ -147,38 +163,46 @@ const EmployeeTable: React.FC = () => {
                   index % 2 === 0 ? "bg-white" : "bg-gray-50"
                 }`}
               >
-                <td style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-8 whitespace-nowrap">
+                <td style={{ paddingLeft: "32px", paddingRight: "32px" }} className="py-8 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-12 w-12">
                       <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                        
+                        <span className="text-sm font-medium text-white">
+                          {employee.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .toUpperCase()}
+                        </span>
                       </div>
                     </div>
                     <div className="ml-6">
                       <div className="text-sm font-medium text-gray-900 mb-1">{employee.name}</div>
-                      <div style={{ marginBottom: "8px" }} className="text-sm text-gray-500">{employee.email}</div>
+                      <div style={{ marginBottom: "8px" }} className="text-sm text-gray-500">
+                        {employee.email}
+                      </div>
                     </div>
                   </div>
                 </td>
-                <td style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-8 whitespace-nowrap">
+                <td style={{ paddingLeft: "32px", paddingRight: "32px" }} className="py-8 whitespace-nowrap">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                     {employee.dept}
                   </span>
                 </td>
-                <td style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-8 whitespace-nowrap">{employee.title}</td>
-                <td style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-8 whitespace-nowrap">
+                <td
+                  style={{ paddingLeft: "32px", paddingRight: "32px" }}
+                  className="py-8 whitespace-nowrap text-sm text-gray-900 font-medium"
+                >
+                  {employee.title}
+                </td>
+                <td style={{ paddingLeft: "32px", paddingRight: "32px" }} className="py-8 whitespace-nowrap">
                   <div className="text-center">
                     <span className="text-lg font-bold text-green-600 bg-green-50 px-4 py-2 rounded-lg">
                       {employee.hourlyRate.currency} {employee.hourlyRate.amount}
                     </span>
                   </div>
                 </td>
-                <td style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-8 whitespace-nowrap">
+                <td style={{ paddingLeft: "32px", paddingRight: "32px" }} className="py-8 whitespace-nowrap">
                   <div className="text-center">
                     <span
                       className={`status-badge text-sm px-4 py-2 ${employee.status === "active" ? "status-active" : "status-resigned"}`}
@@ -187,8 +211,7 @@ const EmployeeTable: React.FC = () => {
                     </span>
                   </div>
                 </td>
-                <td style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-8 whitespace-nowrap">
+                <td style={{ paddingLeft: "32px", paddingRight: "32px" }} className="py-8 whitespace-nowrap">
                   <div className="text-center">
                     <span className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-800">
                       {employee.holidays?.length || 0} days
@@ -196,8 +219,7 @@ const EmployeeTable: React.FC = () => {
                   </div>
                 </td>
                 {user?.role === "hr" && (
-                  <td style={{ paddingLeft: "32px", paddingRight: "32px" }}
-        className="py-8 whitespace-nowrap">
+                  <td style={{ paddingLeft: "32px", paddingRight: "32px" }} className="py-8 whitespace-nowrap">
                     <div className="flex flex-col space-y-2">
                       <button
                         onClick={() => handleEdit(employee._id)}

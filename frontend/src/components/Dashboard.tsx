@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import type { RootState, AppDispatch } from "../store/store"
 import { fetchEmployees } from "../store/slices/employeesSlice"
 import { fetchPayrollSummary } from "../store/slices/payrollSlice"
+import { openModal } from "../store/slices/uiSlice"
 import TopBanner from "./TopBanner"
 import EmployeeTable from "./EmployeeTable"
 import Charts from "./Charts"
@@ -21,6 +22,17 @@ const Dashboard: React.FC = () => {
     dispatch(fetchEmployees(filters))
     dispatch(fetchPayrollSummary({ month: selectedMonth, currency: selectedCurrency }))
   }, [dispatch, filters, selectedMonth, selectedCurrency])
+
+  const handleAddEmployee = () => {
+    dispatch(openModal("addEmployee"))
+    // Scroll to bottom when modal opens
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      })
+    }, 100)
+  }
 
   if (!user) {
     return (
@@ -41,15 +53,20 @@ const Dashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="h-10 w-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold"></span>
+                <span className="text-white font-bold">P</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 ">PayScope Dashboard</h1>
-                <p className="text-sm text-gray-600  ">
+                <h1 className="text-2xl font-bold text-gray-900">PayScope Dashboard</h1>
+                <p className="text-sm text-gray-600">
                   Welcome back, {user.email} ({user.role})
                 </p>
               </div>
             </div>
+            {user?.role === "hr" && (
+              <button onClick={handleAddEmployee} className="btn-primary">
+                + Add Employee
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -59,7 +76,7 @@ const Dashboard: React.FC = () => {
         <div className="space-y-8">
           <TopBanner />
 
-          <div  className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <EmployeeTable />
             </div>
