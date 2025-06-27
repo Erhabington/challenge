@@ -69,29 +69,39 @@ const EmployeeModal: React.FC = () => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
-        <h2 className="text-xl font-semibold mb-4">{isEdit ? "Edit Employee" : "Add Employee"}</h2>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-md mx-auto max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+            <span>👤</span>
+            {isEdit ? "Edit Employee" : "Add Employee"}
+          </h2>
+          <button onClick={handleClose} className="text-gray-400 hover:text-gray-600 transition-colors duration-200">
+            <span className="text-xl">×</span>
+          </button>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
             <input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
+              placeholder="Enter full name"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
             <input
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
+              placeholder="Enter email address"
               required
             />
           </div>
@@ -101,7 +111,7 @@ const EmployeeModal: React.FC = () => {
             <select
               value={formData.dept}
               onChange={(e) => setFormData({ ...formData, dept: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
               required
             >
               <option value="">Select Department</option>
@@ -113,12 +123,13 @@ const EmployeeModal: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
+              placeholder="Enter job title"
               required
             />
           </div>
@@ -137,7 +148,8 @@ const EmployeeModal: React.FC = () => {
                     hourlyRate: { ...formData.hourlyRate, amount: Number.parseFloat(e.target.value) },
                   })
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field"
+                placeholder="0.00"
                 required
               />
             </div>
@@ -151,7 +163,7 @@ const EmployeeModal: React.FC = () => {
                     hourlyRate: { ...formData.hourlyRate, currency: e.target.value },
                   })
                 }
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input-field"
               >
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
@@ -161,11 +173,11 @@ const EmployeeModal: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Employment Status</label>
             <select
               value={formData.status}
               onChange={(e) => setFormData({ ...formData, status: e.target.value as "active" | "resigned" })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
             >
               <option value="active">Active</option>
               <option value="resigned">Resigned</option>
@@ -178,21 +190,17 @@ const EmployeeModal: React.FC = () => {
               type="date"
               value={formData.hireDate}
               onChange={(e) => setFormData({ ...formData, hireDate: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input-field"
               required
             />
           </div>
 
-          <div className="flex justify-end space-x-4 pt-4">
-            <button
-              type="button"
-              onClick={handleClose}
-              className="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50"
-            >
+          <div className="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+            <button type="button" onClick={handleClose} className="btn-secondary">
               Cancel
             </button>
-            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-              {isEdit ? "Update" : "Create"}
+            <button type="submit" className="btn-primary">
+              {isEdit ? "Update Employee" : "Create Employee"}
             </button>
           </div>
         </form>
