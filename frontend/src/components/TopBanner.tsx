@@ -3,13 +3,13 @@
 import type React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState, AppDispatch } from "../store/store"
-import { setCurrency, setMonth, openModal } from "../store/slices/uiSlice"
+import { setCurrency, setMonth } from "../store/slices/uiSlice"
 
 const TopBanner: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { summary, loading } = useSelector((state: RootState) => state.payroll)
   const { selectedCurrency, selectedMonth } = useSelector((state: RootState) => state.ui)
-  const { user } = useSelector((state: RootState) => state.auth)
+  
 
   const currencies = ["USD", "EUR", "PKR"]
 

@@ -138,7 +138,7 @@ const Charts: React.FC = () => {
                 dataKey="headCount"
                 label={({ dept, headCount }) => `${dept}: ${headCount}`}
               >
-                {summary.byDept.map((entry, index) => (
+                {summary.byDept.map((_, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
