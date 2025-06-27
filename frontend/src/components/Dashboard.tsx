@@ -23,33 +23,56 @@ const Dashboard: React.FC = () => {
   }, [dispatch, filters, selectedMonth, selectedCurrency])
 
   if (!user) {
-    return <div>Please log in to access the dashboard.</div>
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">PayScope Dashboard</h1>
-          <p className="text-gray-600">
-            Welcome back, {user.email} ({user.role})
-          </p>
-        </div>
-
-        <TopBanner />
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          <div className="lg:col-span-2">
-            <EmployeeTable />
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="h-10 w-10 bg-primary-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold"></span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900 ">PayScope Dashboard</h1>
+                <p className="text-sm text-gray-600  ">
+                  Welcome back, {user.email} ({user.role})
+                </p>
+              </div>
+            </div>
           </div>
-          <div>
-            <Charts />
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-8">
+          <TopBanner />
+
+          <div  className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <EmployeeTable />
+            </div>
+            <div className="space-y-6">
+              <Charts />
+            </div>
           </div>
         </div>
+      </main>
 
-        <EmployeeModal />
-        <HolidayModal />
-      </div>
+      {/* Modals */}
+      <EmployeeModal />
+      <HolidayModal />
     </div>
   )
 }
