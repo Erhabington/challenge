@@ -25,13 +25,12 @@ const Dashboard: React.FC = () => {
 
   const handleAddEmployee = () => {
     dispatch(openModal("addEmployee"))
-    // Scroll to bottom when modal opens
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      })
-    }, 100)
+        setTimeout(() => {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          })
+        }, 100)
   }
 
   if (!user) {

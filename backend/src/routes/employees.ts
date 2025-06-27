@@ -13,7 +13,19 @@ router.get("/", authenticateToken, async (req: AuthRequest, res: Response): Prom
     if (dept) filter.dept = dept
     if (status) filter.status = status
 
-    const employees = await Employee.find(filter).sort({ createdAt: -1 })
+    const employees = await Employee.aggregate([
+  { $match: filter },
+  {
+    $lookup: {
+      from: "holidays",            // your MongoDB collection name (usually lowercase)
+      localField: "_id",           // field in Employee model
+      foreignField: "employeeId",  // field in Holiday model
+      as: "holidays"               // result field (you already use this in frontend)
+    }
+  },
+  { $sort: { createdAt: -1 } }
+])
+
     res.json(employees)
   } catch (error) {
     res.status(500).json({ message: "Server error" })

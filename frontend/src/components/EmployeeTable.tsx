@@ -167,13 +167,7 @@ const EmployeeTable: React.FC = () => {
                   <div className="flex items-center">
                     <div className="flex-shrink-0 h-12 w-12">
                       <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                        <span className="text-sm font-medium text-white">
-                          {employee.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")
-                            .toUpperCase()}
-                        </span>
+                        
                       </div>
                     </div>
                     <div className="ml-6">
