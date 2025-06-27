@@ -4,7 +4,6 @@ import type React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState, AppDispatch } from "../store/store"
 import { setCurrency, setMonth, openModal } from "../store/slices/uiSlice"
-import { logout } from "../store/slices/authSlice"
 
 const TopBanner: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -14,9 +13,7 @@ const TopBanner: React.FC = () => {
 
   const currencies = ["USD", "EUR", "PKR"]
 
-  const handleLogout = () => {
-    dispatch(logout())
-  }
+  
 
   return (
     <div className="mb-8">
@@ -119,20 +116,6 @@ const TopBanner: React.FC = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
-              {user?.role === "hr" && (
-                <button
-                  onClick={() => dispatch(openModal("addEmployee"))}
-                  className="btn-primary flex items-center gap-2"
-                >
-                  <span>+</span>
-                  Add Employee
-                </button>
-              )}
-
-              <button onClick={handleLogout} className="btn-danger flex items-center gap-2">
-                <span>🚪</span>
-                Logout
-              </button>
             </div>
           </div>
         </div>

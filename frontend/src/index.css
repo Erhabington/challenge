@@ -62,6 +62,13 @@ body {
   background-color: #b91c1c;
 }
 
+/* Large Login Button */
+.btn-primary.btn-large {
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
 /* Inputs */
 .input-field {
   width: 100%;
@@ -76,6 +83,114 @@ body {
   outline: none;
   border-color: #2563eb;
   box-shadow: 0 0 0 2px #3b82f6;
+}
+
+/* Large Input Fields for Login */
+.input-field.input-large {
+  padding: 1rem 0.875rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+}
+
+/* Login Form Specific Styles */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #eff6ff, #dbeafe, #c7d2fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 32rem;
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 3rem;
+  border: 1px solid #dbeafe;
+}
+
+.login-logo {
+  margin: 0 auto 1.5rem;
+  height: 6rem;
+  width: 6rem;
+  background-color: #2563eb;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-form-group {
+  margin-bottom: 2rem;
+}
+
+.login-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.login-error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.login-error-content {
+  display: flex;
+  align-items: center;
+}
+
+.login-error-icon {
+  color: #ef4444;
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.login-error-text {
+  font-size: 1rem;
+  color: #dc2626;
+}
+
+.login-toggle {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.login-toggle-button {
+  color: #2563eb;
+  font-weight: 500;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.login-toggle-button:hover {
+  color: #1d4ed8;
 }
 
 /* Cards */
@@ -136,7 +251,9 @@ body {
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #1e3a8a;
   font-weight: 700;
 }
@@ -172,13 +289,37 @@ p {
   .btn-danger {
     width: 100%;
   }
+
+  .login-form {
+    padding: 2rem;
+    max-width: 90vw;
+  }
+
+  .login-title {
+    font-size: 2rem;
+  }
+
+  .login-container {
+    padding: 1rem;
+  }
 }
 
 /* Animations */
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
 }

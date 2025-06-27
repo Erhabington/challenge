@@ -12,6 +12,7 @@ import EmployeeTable from "./EmployeeTable"
 import Charts from "./Charts"
 import EmployeeModal from "./EmployeeModal"
 import HolidayModal from "./HolidayModal"
+import { logout } from "../store/slices/authSlice"
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -22,6 +23,10 @@ const Dashboard: React.FC = () => {
     dispatch(fetchEmployees(filters))
     dispatch(fetchPayrollSummary({ month: selectedMonth, currency: selectedCurrency }))
   }, [dispatch, filters, selectedMonth, selectedCurrency])
+
+  const handleLogout = () => {
+      dispatch(logout())
+    }
 
   const handleAddEmployee = () => {
     dispatch(openModal("addEmployee"))
@@ -56,7 +61,7 @@ const Dashboard: React.FC = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">PayScope Dashboard</h1>
-                <p className="text-sm text-gray-600">
+                <p style={{ marginTop: "1rem" ,  marginBottom: "1rem" }} className="text-sm text-gray-600">
                   Welcome back, {user.email} ({user.role})
                 </p>
               </div>
@@ -66,6 +71,10 @@ const Dashboard: React.FC = () => {
                 + Add Employee
               </button>
             )}
+            <button onClick={handleLogout} className="btn-danger flex items-center gap-2">
+                <span>🚪</span>
+                Logout
+              </button>
           </div>
         </div>
       </header>

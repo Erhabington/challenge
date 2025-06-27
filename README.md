@@ -11,6 +11,16 @@ cd frontend
 npm install
 npm run dev
 
+# Logins
+# Viewer
+viewer@company.com
+password123
+
+# HR
+hr@company.com
+password123
+
+
 ## Deployed URLs
 
 - **Frontend (Vercel)**: [Add your Vercel URL here]
