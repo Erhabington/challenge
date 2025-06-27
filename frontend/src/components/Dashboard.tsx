@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="h-10 w-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">P</span>
+                <span className="text-white font-bold"></span>
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">PayScope Dashboard</h1>
