@@ -13,6 +13,7 @@ import Charts from "./Charts"
 import EmployeeModal from "./EmployeeModal"
 import HolidayModal from "./HolidayModal"
 import { logout } from "../store/slices/authSlice"
+import { resetUI } from "../store/slices/uiSlice"
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -26,6 +27,7 @@ const Dashboard: React.FC = () => {
 
   const handleLogout = () => {
       dispatch(logout())
+      dispatch(resetUI())
     }
 
   const handleAddEmployee = () => {

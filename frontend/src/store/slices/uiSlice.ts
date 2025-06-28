@@ -55,8 +55,16 @@ const uiSlice = createSlice({
     setSelectedEmployeeId: (state, action: PayloadAction<string | null>) => {
       state.selectedEmployeeId = action.payload
     },
+    resetUI: (state) => {
+    state.modals = {
+    addEmployee: false,
+    editEmployee: false,
+    addHoliday: false,
+    }
+    state.selectedEmployeeId = null
+    }
   },
 })
 
-export const { setCurrency, setMonth, setFilters, openModal, closeModal, setSelectedEmployeeId } = uiSlice.actions
+export const { setCurrency, setMonth, setFilters, openModal, closeModal, setSelectedEmployeeId, resetUI, } = uiSlice.actions
 export default uiSlice.reducer

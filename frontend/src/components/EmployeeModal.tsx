@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux"
 import type { RootState, AppDispatch } from "../store/store"
 import { createEmployee, updateEmployee } from "../store/slices/employeesSlice"
 import { closeModal } from "../store/slices/uiSlice"
+import { fetchPayrollSummary } from "../store/slices/payrollSlice"
+
 
 const EmployeeModal: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { modals, selectedEmployeeId } = useSelector((state: RootState) => state.ui)
   const { employees } = useSelector((state: RootState) => state.employees)
-
+  const { selectedMonth, selectedCurrency } = useSelector((state: RootState) => state.ui)
   const isOpen = modals.addEmployee || modals.editEmployee
   const isEdit = modals.editEmployee
   const selectedEmployee = employees.find((emp) => emp._id === selectedEmployeeId)
@@ -51,16 +53,19 @@ const EmployeeModal: React.FC = () => {
   }, [isEdit, selectedEmployee])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    if (isEdit && selectedEmployeeId) {
-      dispatch(updateEmployee({ id: selectedEmployeeId, updates: formData }))
-    } else {
-      dispatch(createEmployee(formData))
-    }
-
-    dispatch(closeModal(isEdit ? "editEmployee" : "addEmployee"))
+  if (isEdit && selectedEmployeeId) {
+    await dispatch(updateEmployee({ id: selectedEmployeeId, updates: formData }))
+  } else {
+    await dispatch(createEmployee(formData))
   }
+
+  await dispatch(fetchPayrollSummary({ month: selectedMonth, currency: selectedCurrency }))
+
+  dispatch(closeModal(isEdit ? "editEmployee" : "addEmployee"))
+}
+
 
   const handleClose = () => {
     dispatch(closeModal(isEdit ? "editEmployee" : "addEmployee"))
