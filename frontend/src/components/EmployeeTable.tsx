@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux"
 import type { RootState, AppDispatch } from "../store/store"
 import { deleteEmployee } from "../store/slices/employeesSlice"
 import { openModal, setSelectedEmployeeId, setFilters } from "../store/slices/uiSlice"
+import { fetchPayrollSummary } from "../store/slices/payrollSlice"
 
 const EmployeeTable: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { employees, loading } = useSelector((state: RootState) => state.employees)
   const { filters } = useSelector((state: RootState) => state.ui)
+  const { selectedMonth, selectedCurrency } = useSelector((state: RootState) => state.ui)
   const { user } = useSelector((state: RootState) => state.auth)
 
   const handleEdit = (employeeId: string) => {
@@ -25,10 +27,11 @@ const EmployeeTable: React.FC = () => {
   }
 
   const handleDelete = async (employeeId: string) => {
-    if (window.confirm("Are you sure you want to delete this employee?")) {
-      dispatch(deleteEmployee(employeeId))
-    }
+  if (window.confirm("Are you sure you want to delete this employee?")) {
+    await dispatch(deleteEmployee(employeeId))
+    dispatch(fetchPayrollSummary({ month: selectedMonth, currency: selectedCurrency }))
   }
+}
 
   const handleAddHoliday = (employeeId: string) => {
     dispatch(setSelectedEmployeeId(employeeId))
